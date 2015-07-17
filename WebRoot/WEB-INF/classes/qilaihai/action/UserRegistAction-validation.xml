@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE validators PUBLIC 
+	"-//Apache Struts//XWork Validator 1.0.3//EN"
+	"http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+<validators>
+	<field name="user.phoneNumber">
+		<field-validator type="requiredstring">
+			<message>手机号码未填写</message>
+		</field-validator>
+		<field-validator type="regex">
+			<param name="regex"><![CDATA[(1\d{10})]]></param>
+			<message>手机号码必须11位数</message>
+		</field-validator>
+	</field>
+	<field name="user.password">
+		<field-validator type="requiredstring">
+			<message>密码未填写</message>
+		</field-validator>
+		<field-validator type="regex">
+			<param name="regex"><![CDATA[([\w\d]{6,25})]]></param>
+			<message>密码只能是字母和数字，且长度必须在6到25之间</message>
+		</field-validator>
+	</field>
+</validators>
