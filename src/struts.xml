@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+
+	<constant name="struts.devMode" value="true" />
+	
+	<package name="default" extends="struts-default" namespace="/">
+
+		<interceptors>
+
+			<interceptor name="checkCookie"
+				class="qilaihai.action.interceptor.CheckCookieInterceptor" />
+
+			<!-- 定义拦截器 -->
+			<interceptor-stack name="cookieTestStack">
+				<interceptor-ref name="checkCookie" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+
+		</interceptors>
+
+		<action name="userLogin" class="userLoginAction">
+			<result name="success">/WEB-INF/content/success.jsp</result>
+			<result name="failed">/WEB-INF/content/failed.jsp</result>
+		</action>
+
+		<action name="userRegist" class="userRegistAction">
+			<result name="success">/WEB-INF/content/success.jsp</result>
+			<result name="failed">/WEB-INF/content/failed.jsp</result>
+		</action>
+
+		<action name="weiboPost" class="weiboPostAction">
+		
+            <interceptor-ref name="fileUpload">
+                <param name="maximumSize">1048576</param>
+                <param name="allowedTypes">
+                    image/bmp,image/png,image/gif,image/jpeg,image/jpg
+                </param>
+            </interceptor-ref>
+			<interceptor-ref name="cookieTestStack" />
+			
+			<result name="success">/WEB-INF/content/success.jsp</result>
+			<result name="failed">/WEB-INF/content/failed.jsp</result>
+		</action>
+
+		<action name="weiboGet" class="weiboGetAction">
+			<interceptor-ref name="cookieTestStack" />
+
+			<result name="success">/WEB-INF/content/weiboList.jsp</result>
+			<result name="failed">/WEB-INF/content/failed.jsp</result>
+		</action>
+
+	</package>
+</struts>    
